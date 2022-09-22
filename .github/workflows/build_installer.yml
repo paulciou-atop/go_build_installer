@@ -15,7 +15,7 @@ jobs:
       - name: install tools
         run: |
           choco source add -n=mh-cbon -s="https://api.bintray.com/nuget/mh-cbon/choco"
-          choco install changelog gh-api-cli -y 
+          #choco install changelog gh-api-cli -y 
           choco install go-msi 
           choco install wixtoolset
           refreshenv
@@ -36,10 +36,11 @@ jobs:
           dir 
           cd ..
           COPY source\listen13380.exe exefile\
-          
+          dir exefile\
       - name: build installer
         run: |
-          go-msi make --msi nms.%VERSION%.msi --version %VERSION%
+          C:\Program Files\go-msi\go-msi.exe check-env
+          C:\Program Files\go-msi\go-msi.exe make --msi nms.%VERSION%.msi --version %VERSION%
           dir 
           
           
