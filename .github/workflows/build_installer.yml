@@ -39,8 +39,8 @@ jobs:
           dir exefile\
       - name: build installer
         run: |
-          C:\Program Files\go-msi\go-msi.exe check-env
-          C:\Program Files\go-msi\go-msi.exe make --msi nms.%VERSION%.msi --version %VERSION%
+          "C:\Program Files\go-msi\go-msi.exe" check-env
+          "C:\Program Files\go-msi\go-msi.exe" make --msi nms.%VERSION%.msi --version %VERSION%
           dir 
           
           
