@@ -2,13 +2,13 @@ name: Build Windows Installer
 on: 
   push:
     branches: 
-      -'main'
-      -'!test/**'
+    -'main'
+    -'!test/**'
   pull_request:
     types: [opened, reopened, review_requested]
     branches: 
-      -'main'
-      -'!test/**'
+    -'main'
+    -'!test/**'
   workflow_dispatch:
     inputs:
       user:
