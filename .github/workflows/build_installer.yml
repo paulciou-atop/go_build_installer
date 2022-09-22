@@ -40,6 +40,7 @@ jobs:
           COPY source/listen13380.exe exefile/
           cd ..
       - name: build installer
+        run: |
           go-msi make --msi nms.%VERSION%.msi --version %VERSION%
           dir *msi
           
