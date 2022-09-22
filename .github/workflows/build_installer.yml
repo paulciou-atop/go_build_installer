@@ -1,20 +1,6 @@
 name: Build Windows Installer 
-on: 
-  push:
-    branches: 
-      - main
-      -'!test/**'
-  pull_request:
-    types: [opened, reopened, review_requested]
-    branches: 
-      - main
-      -'!test/**'
-  workflow_dispatch:
-    inputs:
-      user:
-        description: 'user'     
-      modules:
-        description: 'modules to test' 
+on: push
+  
 jobs:
   Docker-Artifacts-Upload:
     runs-on: windows-latest
