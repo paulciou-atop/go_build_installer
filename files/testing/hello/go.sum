@@ -1,0 +1,6 @@
+github.com/kardianos/osext v0.0.0-20170207191655-9b883c5eb462 h1:oSOOTPHkCzMeu1vJ0nHxg5+XZBdMMjNa+6NPnm8arok=
+github.com/kardianos/osext v0.0.0-20170207191655-9b883c5eb462/go.mod h1:1NbS8ALrpOvjt0rHPNLyCIeMtbizbir8U//inJ+zuB8=
+github.com/kardianos/service v0.0.0-20170207192559-ef06f2f890aa h1:hkOZqd02f7GFWiLvn0K0pxg/2TXBlNRVSwb4+FWMFSQ=
+github.com/kardianos/service v0.0.0-20170207192559-ef06f2f890aa/go.mod h1:10UU/bEkzh2iEN6aYzbevY7J6p03KO5siTxQWXMEerg=
+golang.org/x/sys v0.0.0-20170303135930-e48874b42435 h1:l6zlvfUdGUw4RTRRTfu0Q8RV/jbTVGIpRvwFgrfNEJs=
+golang.org/x/sys v0.0.0-20170303135930-e48874b42435/go.mod h1:STP8DvDyc/dI5b8T5hshtkjS+E42TnysNCUPdjciGhY=

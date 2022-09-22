@@ -1,0 +1,51 @@
+{
+  "product": "nms",
+  "company": "atop",
+  "license": "LICENSE",
+  "upgrade-code": "06e611e7-0026-4e7a-9741-91e375c2e155",
+  "files": {
+    "guid": "da84fb61-0ed0-4550-9bc7-f2acbf8df340",
+    "items": [
+      "go_winservice.exe"
+    ]
+  },
+  "directories": [
+    "exefile"
+  ],
+  "env": {
+    "guid": "b1a2e033-f1c8-49ac-92ab-316b4392560a",
+    "vars": [
+      {
+        "name": "PATH",
+        "value": "[INSTALLDIR]",
+        "permanent": "no",
+        "system": "no",
+        "action": "set",
+        "part": "last"
+      }
+    ]
+  },
+  "shortcuts": {
+    "guid": "6DAFD205-3D2D-43D7-BF78-33BFE8746D2A",
+    "items": [
+      {
+        "name": "go_winservice",
+        "description": "go_winservice",
+        "target": "[INSTALLDIR]\\go_winservice.exe",
+        "wdir": "INSTALLDIR",
+        "arguments": "start",
+        "icon": "start.ico"
+      }
+    ]
+  },
+  "hooks": [
+    {
+      "command": "[INSTALLDIR]go_winservice.exe install",
+      "when": "install"
+    },
+    {
+      "command": "[INSTALLDIR]go_winservice.exe remove",
+      "when": "uninstall"
+    }
+  ]
+}

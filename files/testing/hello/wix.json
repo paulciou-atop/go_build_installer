@@ -1,0 +1,61 @@
+{
+  "product": "hello",
+  "company": "mh-cbon",
+  "license": "LICENSE",
+  "upgrade-code": "a7c25f16-03b5-4dfa-ad95-0ffbcf239dbe",
+  "files": {
+    "guid": "d0a2fe64-5b63-4ca0-89d3-4c935ffd368c",
+    "items": [
+      "hello.exe"
+    ]
+  },
+  "directories": [
+    "assets","wixtemplates"
+  ],
+  "env": {
+    "guid": "c5b035ce-5b7d-4ccc-9e51-178a6e3c6ac9",
+    "vars": [
+      {
+        "name": "some",
+        "value": "value",
+        "permanent": "no",
+        "system": "no",
+        "action": "set",
+        "part": "last"
+      }
+    ]
+  },
+  "shortcuts": {
+    "guid": "66782a13-c2a8-47ea-bbcd-1ef77aef8d5a",
+    "items": [
+      {
+        "name": "hello",
+        "description": "hello web server",
+        "target": "[INSTALLDIR]\\hello.exe",
+        "wdir": "INSTALLDIR",
+        "arguments": "",
+        "icon": "ico.ico"
+      }
+    ]
+  },
+  "choco": {
+    "description": "hello program",
+    "project-url": "https://github.com/mh-cbon/go-msi/tree/master/testing",
+    "tags": "hello",
+    "license-url": "https://github.com/mh-cbon/go-msi/blob/master/LICENSE"
+  },
+  "hooks": [
+    {
+      "command": "sc.exe create HelloSvc binPath=\"[INSTALLDIR]hello.exe\" type=share start=auto DisplayName=\"Hello!\"",
+      "when": "install"
+    },
+    {
+      "command": "sc.exe start HelloSvc",
+      "when": "install"
+    },
+    {
+      "command": "sc.exe delete HelloSvc",
+      "when": "uninstall"
+    }
+  ]
+}

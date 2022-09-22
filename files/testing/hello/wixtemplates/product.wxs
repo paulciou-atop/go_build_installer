@@ -1,0 +1,142 @@
+<?xml version="1.0"?>
+
+<?if $(sys.BUILDARCH)="x86"?>
+    <?define Program_Files="ProgramFilesFolder"?>
+<?elseif $(sys.BUILDARCH)="x64"?>
+    <?define Program_Files="ProgramFiles64Folder"?>
+<?else?>
+    <?error Unsupported value of sys.BUILDARCH=$(sys.BUILDARCH)?>
+<?endif?>
+
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+
+   <Product Id="*" UpgradeCode="a7c25f16-03b5-4dfa-ad95-0ffbcf239dbe"
+            Name="hello"
+            Version="0.0.1"
+            Manufacturer="mh-cbon"
+            Language="1033">
+
+      <Package InstallerVersion="200" Compressed="yes" Comments="Windows Installer Package" InstallScope="perMachine"/>
+
+      <Media Id="1" Cabinet="product.cab" EmbedCab="yes"/>
+
+      <Upgrade Id="a7c25f16-03b5-4dfa-ad95-0ffbcf239dbe">
+         <UpgradeVersion Minimum="0.0.1" OnlyDetect="yes" Property="NEWERVERSIONDETECTED"/>
+         <UpgradeVersion Minimum="0.0.0" Maximum="0.0.1" IncludeMinimum="yes" IncludeMaximum="no"
+                         Property="OLDERVERSIONBEINGUPGRADED"/>
+      </Upgrade>
+      <Condition Message="A newer version of this software is already installed.">NOT NEWERVERSIONDETECTED</Condition>
+
+      <Directory Id="TARGETDIR" Name="SourceDir">
+
+         <Directory Id="$(var.Program_Files)">
+            <Directory Id="INSTALLDIR" Name="hello">
+               
+               <Component Id="ApplicationFiles" Guid="d0a2fe64-5b63-4ca0-89d3-4c935ffd368c">
+                  
+                    <File Id="ApplicationFile0" Source="..\hello.exe"/>
+                  
+               </Component>
+               
+               
+               
+               <Directory Id="APPDIR0" Name="assets" />
+               
+               
+            </Directory>
+         </Directory>
+
+         
+         <Component Id="ENVS" Guid="c5b035ce-5b7d-4ccc-9e51-178a6e3c6ac9">
+          
+          <Environment Id="ENV0"
+            Name="some"
+            Value="value"
+            Permanent="no"
+            Part="last"
+            Action="set"
+            System="no" />
+          
+        </Component>
+        
+
+         
+         <Directory Id="ProgramMenuFolder">
+            <Directory Id="ProgramMenuSubfolder" Name="hello">
+               <Component Id="ApplicationShortcuts" Guid="66782a13-c2a8-47ea-bbcd-1ef77aef8d5a">
+               
+                  <Shortcut Id="ApplicationShortcut0"
+                        Name="hello"
+                        Description="hello web server"
+                        Target="[INSTALLDIR]\hello.exe"
+                        WorkingDirectory="INSTALLDIR"
+                        
+                        >
+                        
+                        <Icon Id="Icon0" SourceFile="..\ico.ico" />
+                        
+                  </Shortcut>
+                  <RegistryValue Root="HKCU"
+                    Key="Software\mh-cbon\hello"
+                    Name="installed0"
+                    Type="integer" Value="1" KeyPath="yes"/>
+                
+                <RemoveFolder Id="ProgramMenuSubfolder" On="uninstall"/>
+               </Component>
+            </Directory>
+         </Directory>
+         
+
+      </Directory>
+
+      
+      <SetProperty Id="CustomInstallExec0" Value="&#34;sc.exe&#34; create HelloSvc binPath=&#34;[INSTALLDIR]hello.exe&#34; type=share start=auto DisplayName=&#34;Hello!&#34;" Before="CustomInstallExec0" Sequence="execute"/>
+      <CustomAction Id="CustomInstallExec0" BinaryKey="WixCA" DllEntry="WixQuietExec" Execute="deferred" Return="check" Impersonate="no"/>
+      
+      <SetProperty Id="CustomInstallExec1" Value="&#34;sc.exe&#34; start HelloSvc" Before="CustomInstallExec1" Sequence="execute"/>
+      <CustomAction Id="CustomInstallExec1" BinaryKey="WixCA" DllEntry="WixQuietExec" Execute="deferred" Return="check" Impersonate="no"/>
+      
+      
+      <SetProperty Id="CustomUninstallExec0" Value="&#34;sc.exe&#34; delete HelloSvc" Before="CustomUninstallExec0" Sequence="execute"/>
+      <CustomAction Id="CustomUninstallExec0" BinaryKey="WixCA" DllEntry="WixQuietExec" Execute="deferred" Return="check" Impersonate="no"/>
+      
+      <InstallExecuteSequence>
+         <RemoveExistingProducts After="InstallValidate"/>
+         
+         <Custom Action="CustomInstallExec0" After="InstallFiles">NOT Installed AND NOT REMOVE</Custom>
+         
+         <Custom Action="CustomInstallExec1" After="CustomInstallExec0">NOT Installed AND NOT REMOVE</Custom>
+         
+         
+         <Custom Action="CustomUninstallExec0" After="InstallInitialize">REMOVE ~= "ALL"</Custom>
+         
+      </InstallExecuteSequence>
+
+      <Feature Id="DefaultFeature" Level="1">
+         
+         <ComponentRef Id="ENVS"/>
+         
+         
+         <ComponentRef Id="ApplicationFiles"/>
+         
+         
+         <ComponentRef Id="ApplicationShortcuts"/>
+         
+         
+         <ComponentGroupRef Id="AppFiles0" />
+         
+      </Feature>
+
+      <UI>
+         <!-- Define the installer UI -->
+         <UIRef Id="WixUI_HK" />
+      </UI>
+
+      <Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR" />
+
+      <!-- this should help to propagate env var changes -->
+      <CustomActionRef Id="WixBroadcastEnvironmentChange" />
+
+   </Product>
+
+</Wix>
