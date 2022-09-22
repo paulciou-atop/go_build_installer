@@ -27,8 +27,7 @@ jobs:
           
           curl -fsSk -o jfrog.exe -L "https://api.bintray.com/content/jfrog/jfrog-cli-go/$latest/jfrog-cli-windows-amd64/jfrog.exe?bt_package=jfrog-cli-windows-amd64"
           go get -u github.com/mh-cbon/never-fail
-          go get -u github.com/Masterminds/glide
-          glide install  
+           
       - name: build source code
         run: | 
           cd source
