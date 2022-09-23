@@ -5,7 +5,7 @@ jobs:
   build_a_windows_installer:
     runs-on: self-hosted
     env:
-      version: 0.9.13
+      version: 0.9.14
     steps:
       - name: Checkout Repository Code
         uses: actions/checkout@v3
