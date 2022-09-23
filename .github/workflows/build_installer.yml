@@ -36,7 +36,7 @@ jobs:
           cd source
           
           set GOARCH=amd64
-          go build -o listen13380.exe --ldflags "-X main.VERSION="${{ env.version }}" main.go
+          go build -o listen13380.exe --ldflags "-X main.VERSION=${{ env.version }}" main.go
           dir 
           cd ..
           COPY source\listen13380.exe exefile\
