@@ -25,6 +25,8 @@ jobs:
           set VERSION=%APPVEYOR_REPO_TAG_NAME%
           set VERSION=1.0.2        
           set PATH=%PATH%;"C:\Program Files\go-msi\" 
+          go get github.com/mh-cbon/go-msi
+          refreshenv
           go-msi check-env
           
            
@@ -40,7 +42,7 @@ jobs:
           dir exefile\
       - name: build installer
         run: |
-          go-msi check-env
+          go-msi.exe check-env
           "C:\Program Files\go-msi\go-msi.exe make --msi nms.%VERSION%.msi --version %VERSION%"
           dir 
           
