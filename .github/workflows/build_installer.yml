@@ -3,7 +3,7 @@ on: push
   
 jobs:
   Setting-running-env:
-    runs-on: windows-latest
+    runs-on: self-hosted
     env:
       version: 0.9.12
     steps:
