@@ -17,7 +17,7 @@ jobs:
           choco source add -n=mh-cbon -s="https://api.bintray.com/nuget/mh-cbon/choco"
           #choco install changelog gh-api-cli -y 
           choco install go-msi 
-          dir "C:\Program Files\go-msi"
+          dir 
           choco install wixtoolset
           refreshenv
           set GH_APP=%APPVEYOR_PROJECT_NAME%
@@ -27,7 +27,7 @@ jobs:
           set PATH=%PATH%;"C:\Program Files\go-msi\" 
           go get github.com/mh-cbon/go-msi
           refreshenv
-          go-msi check-env
+          go-msi.exe check-env
           
            
       - name: build source code
