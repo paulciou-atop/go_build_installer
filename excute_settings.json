@@ -1,0 +1,5 @@
+{
+    "orderly":["mqttbroker.exe","scanservice.exe"],
+    "disOrder":["atopudpscan.exe","config.exe","health.exe","inventory.exe","logging.exe","messaging.exe","scanservice.exe","security.exe","snmpconfig.exe","snmpscan.exe","token.exe","usermgmt.exe"]
+
+}

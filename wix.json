@@ -6,7 +6,7 @@
   "files": {
     "guid": "da84fb61-0ed0-4550-9bc7-f2acbf8df340",
     "items": [
-      "go_winservice.exe"
+      "nms_service.exe"
     ]
   },
   "directories": [
@@ -29,9 +29,9 @@
     "guid": "6DAFD205-3D2D-43D7-BF78-33BFE8746D2A",
     "items": [
       {
-        "name": "go_winservice",
-        "description": "go_winservice",
-        "target": "[INSTALLDIR]\\go_winservice.exe",
+        "name": "nms_service",
+        "description": "nms_service",
+        "target": "[INSTALLDIR]\\nms_service.exe",
         "wdir": "INSTALLDIR",
         "arguments": "start",
         "icon": "start.ico"
@@ -40,11 +40,15 @@
   },
   "hooks": [
     {
-      "command": "[INSTALLDIR]go_winservice.exe install",
+      "command": "[INSTALLDIR]nms_service.exe install",
+      "when": "install"
+    },
+	{
+      "command": "[INSTALLDIR]nms_service.exe start",
       "when": "install"
     },
     {
-      "command": "[INSTALLDIR]go_winservice.exe remove",
+      "command": "[INSTALLDIR]nms_service.exe remove",
       "when": "uninstall"
     }
   ]
