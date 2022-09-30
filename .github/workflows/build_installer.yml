@@ -39,7 +39,7 @@ jobs:
           go build -o listen13380.exe --ldflags "-X main.VERSION=${{ env.version }}" main.go
           dir 
           cd ..
-          COPY source\listen13380.exe exefile\
+          run cp source\listen13380.exe exefile\
           dir exefile\
       - name: build installer
         run: |
